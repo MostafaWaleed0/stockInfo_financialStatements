@@ -80,7 +80,7 @@ const FinancialStatementResults: React.FC<FinancialStatementResultsProps> = ({
     return statement.map((item) => {
       const newItem: FinancialStatementResultsType = {};
       for (const key in item) {
-        if (item.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(item, key)) {
           const value = Number(item[key].replace(/[^0-9.]/g, ""));
           newItem[key] = value;
         }
