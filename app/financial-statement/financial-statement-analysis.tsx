@@ -98,7 +98,7 @@ function FinancialStatementAnalysis() {
         <div className="table-auto">
           <div className="bg-inherit">
             <div className="grid grid-cols-[1.5fr_repeat(10,1fr)] gap-2">
-              <div></div>
+              <div />
               {statement.map((_, index) => (
                 <div
                   className="px-4 py-3 uppercase tracking-wider text-center"
