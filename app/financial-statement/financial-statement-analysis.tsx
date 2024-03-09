@@ -25,7 +25,7 @@ function FinancialStatementAnalysis() {
   };
 
   function flattenObject(
-    obj: FinancialStatementType
+    obj: FinancialStatementType,
   ): FlatFinancialStatementType {
     const result: FlatFinancialStatementType = {};
 
@@ -37,7 +37,7 @@ function FinancialStatementAnalysis() {
   }
 
   function generateFinancialDataArray(
-    length: number
+    length: number,
   ): FlatFinancialStatementType[] {
     const flatFinancialStatement = flattenObject(initialFinancialStatement);
 
@@ -46,7 +46,7 @@ function FinancialStatementAnalysis() {
       for (const key in flatFinancialStatement) {
         if (flatFinancialStatement.hasOwnProperty(key)) {
           financialStatement[`${key}_${index}`] = String(
-            flatFinancialStatement[key]
+            flatFinancialStatement[key],
           );
         }
       }
@@ -56,12 +56,12 @@ function FinancialStatementAnalysis() {
 
   const [statement, setStatement] = useLocalStorage(
     "values",
-    generateFinancialDataArray(10)
+    generateFinancialDataArray(10),
   );
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) {
     const { name, value } = event.target;
     const formattedValue = value
@@ -98,7 +98,7 @@ function FinancialStatementAnalysis() {
         <div className="table-auto">
           <div className="bg-inherit">
             <div className="grid grid-cols-[1.5fr_repeat(10,1fr)] gap-2">
-              <div></div>
+              <div />
               {statement.map((_, index) => (
                 <div
                   className="px-4 py-3 uppercase tracking-wider text-center"
