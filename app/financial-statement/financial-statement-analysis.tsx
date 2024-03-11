@@ -44,7 +44,7 @@ function FinancialStatementAnalysis() {
     return Array.from({ length }, (_, index) => {
       const financialStatement: FlatFinancialStatementType = {};
       for (const key in flatFinancialStatement) {
-        if (flatFinancialStatement.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(flatFinancialStatement, key)) {
           financialStatement[`${key}_${index}`] = String(
             flatFinancialStatement[key],
           );
