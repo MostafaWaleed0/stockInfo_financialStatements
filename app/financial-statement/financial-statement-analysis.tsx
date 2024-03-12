@@ -25,7 +25,7 @@ function FinancialStatementAnalysis() {
   };
 
   const generateFinancialDataArray = (
-    length: number
+    length: number,
   ): FlatFinancialStatementType[] => {
     const flatFinancialStatement = flattenObject(initialFinancialStatement);
     return Array.from({ length }, (_, index) => {
@@ -33,7 +33,7 @@ function FinancialStatementAnalysis() {
       for (const key in flatFinancialStatement) {
         if (Object.prototype.hasOwnProperty.call(flatFinancialStatement, key)) {
           financialStatement[`${key}_${index}`] = String(
-            flatFinancialStatement[key]
+            flatFinancialStatement[key],
           );
         }
       }
@@ -42,7 +42,7 @@ function FinancialStatementAnalysis() {
   };
 
   const flattenObject = (
-    obj: FinancialStatementType
+    obj: FinancialStatementType,
   ): FlatFinancialStatementType => {
     const result: FlatFinancialStatementType = {};
     for (const key in obj) {
@@ -55,12 +55,12 @@ function FinancialStatementAnalysis() {
 
   const [statement, setStatement] = useLocalStorage(
     "values",
-    generateFinancialDataArray(10)
+    generateFinancialDataArray(10),
   );
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     const { name, value } = event.target;
     const formattedValue = value
