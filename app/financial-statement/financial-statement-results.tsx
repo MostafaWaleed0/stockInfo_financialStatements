@@ -11,7 +11,7 @@ type FinancialStatementResultsProps = {
   statement: FlatFinancialStatementType[];
 };
 
-const BusinessTypeMetrics: BusinessTypeMetrics = {
+const businessMetrics: BusinessTypeMetrics = {
   industrial: {
     "Gross Margin": { good: 40, bad: 20 },
     "Net Income": { good: 20, bad: 10 },
@@ -69,7 +69,7 @@ const FinancialStatementResults: React.FC<FinancialStatementResultsProps> = ({
     const updatedMetrics = metrics.map((metric) => {
       const { label } = metric;
       const { good, bad } =
-        BusinessTypeMetrics[newType as keyof BusinessTypeMetrics][label];
+        businessMetrics[newType as keyof BusinessTypeMetrics][label];
       return { ...metric, good, bad };
     });
 
@@ -96,7 +96,7 @@ const FinancialStatementResults: React.FC<FinancialStatementResultsProps> = ({
           onChange={handleChange}
           className="capitalize w-56 text-blue-800 px-2 py-1 rounded"
         >
-          {Object.keys(BusinessTypeMetrics).map((key) => [
+          {Object.keys(businessMetrics).map((key) => [
             <option key={key} value="bank" className="font-bold">
               {key}
             </option>,
@@ -114,8 +114,7 @@ const FinancialStatementResults: React.FC<FinancialStatementResultsProps> = ({
               return item[`${value}_${index}`];
             });
             const { good, bad } =
-              BusinessTypeMetrics[type as keyof BusinessTypeMetrics][label] ||
-              0;
+              businessMetrics[type as keyof BusinessTypeMetrics][label] || 0;
             const calculatedValue = calculate(...value);
 
             return (
