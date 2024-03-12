@@ -17,7 +17,7 @@ export function Search({ stocks }: { stocks: { [key: string]: string }[] }) {
 
       return params.toString();
     },
-    [searchParams]
+    [searchParams],
   );
 
   return (

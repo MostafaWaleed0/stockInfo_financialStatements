@@ -2,7 +2,7 @@ import { SetStateAction, useState } from "react";
 
 const useLocalStorage = <T,>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, React.Dispatch<SetStateAction<T>>] => {
   const [state, setState] = useState(() => {
     try {
