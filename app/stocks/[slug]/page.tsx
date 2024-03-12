@@ -2,7 +2,7 @@ import Image from "next/image";
 
 async function getStockDetails(symbol: string) {
   let response = await fetch(
-    `https://financialmodelingprep.com/api/v3/profile/${symbol}?apikey=${process.env.STOCK_MARKET_API}`
+    `https://financialmodelingprep.com/api/v3/profile/${symbol}?apikey=${process.env.STOCK_MARKET_API}`,
   );
 
   return response.json();
