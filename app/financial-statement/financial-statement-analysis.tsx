@@ -24,70 +24,54 @@ function FinancialStatementAnalysis() {
     totalCostsAndExpenses: "",
   };
 
-  function flattenObject(
-    obj: FinancialStatementType,
-  ): FlatFinancialStatementType {
-    const result: FlatFinancialStatementType = {};
-
-    for (const key in obj) {
-      result[key] = String(obj[key]);
-    }
-
-    return result;
-  }
-
-  function generateFinancialDataArray(
-    length: number,
-  ): FlatFinancialStatementType[] {
+  const generateFinancialDataArray = (
+    length: number
+  ): FlatFinancialStatementType[] => {
     const flatFinancialStatement = flattenObject(initialFinancialStatement);
-
     return Array.from({ length }, (_, index) => {
       const financialStatement: FlatFinancialStatementType = {};
       for (const key in flatFinancialStatement) {
         if (Object.prototype.hasOwnProperty.call(flatFinancialStatement, key)) {
           financialStatement[`${key}_${index}`] = String(
-            flatFinancialStatement[key],
+            flatFinancialStatement[key]
           );
         }
       }
       return financialStatement;
     });
-  }
+  };
+
+  const flattenObject = (
+    obj: FinancialStatementType
+  ): FlatFinancialStatementType => {
+    const result: FlatFinancialStatementType = {};
+    for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        result[key] = String(obj[key]);
+      }
+    }
+    return result;
+  };
 
   const [statement, setStatement] = useLocalStorage(
     "values",
-    generateFinancialDataArray(10),
+    generateFinancialDataArray(10)
   );
 
-  function handleChange(
+  const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) {
+    index: number
+  ) => {
     const { name, value } = event.target;
     const formattedValue = value
       .replace(/[^0-9-]/g, "")
       .replace(/(-?\d)(?=(\d{3})+(?!\d))/g, "$1,");
-
     setStatement((prevData) => {
       const newData = [...prevData];
       newData[index][name] = formattedValue;
       return newData;
     });
-  }
-
-  // const handleClearAll = () => {
-  //   setStatement((prevData) => {
-  //     return prevData.map((item) => {
-  //       const clearedItem = { ...item };
-  //       for (const key in clearedItem) {
-  //         if (clearedItem.hasOwnProperty(key) && key !== "name") {
-  //           clearedItem[key] = "";
-  //         }
-  //       }
-  //       return clearedItem;
-  //     });
-  //   });
-  // };
+  };
 
   return (
     <div className="overflow-auto">
@@ -112,16 +96,14 @@ function FinancialStatementAnalysis() {
           <div className="bg-inherit divide-y divide-gray-200 px-6 pb-4">
             <div className="grid grid-cols-[1.5fr_repeat(10,1fr)] gap-2">
               <div>
-                {Object.keys(initialFinancialStatement).map((key) => {
-                  return (
-                    <div
-                      key={key}
-                      className="whitespace-nowrap py-3 capitalize grid items-center "
-                    >
-                      {key.replace(/([A-Z])/g, " $1").toUpperCase()}
-                    </div>
-                  );
-                })}
+                {Object.keys(initialFinancialStatement).map((key) => (
+                  <div
+                    key={key}
+                    className="whitespace-nowrap py-3 capitalize grid items-center "
+                  >
+                    {key.replace(/([A-Z])/g, " $1").toUpperCase()}
+                  </div>
+                ))}
               </div>
               {statement.map((item, index) => (
                 <div className="grid gap-1" key={index}>
